@@ -13,11 +13,10 @@
 STARLINGrt : [I]nteractive [R]etention [T]ime vi[S]ualization for gas chromatography
 ===
 
-<img src="docs/_static/logo_small.png" height="100" align="left" />
+<img src="docs/_static/logo.png" height="100" align="left" />
 
 STARLINGrt is a tool for analyzing retention times from gas chromatogaphy.  It can be used to compare times for the same substance to determine a consensus value by visualizing results from a library.  At the moment it is configured to work with the outputs from [MassHunter](https://www.agilent.com/en/product/software-informatics/mass-spectrometry-software).  The code produces an interactive HTML file using [Bokeh](https://bokeh.org/) which can be modified interactively, saved, exported and shared easily between different users.  The name "starling" was selected as a reverse acronym of the tool's purpose. 
 
-<br/>
 <br/>
 
 Installation
