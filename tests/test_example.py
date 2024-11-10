@@ -5,7 +5,7 @@ author: Nathan A. Mahynski
 """
 import unittest
 
-from my_package import * # Bad form, but just a placeholder example
+from starlingrt import * # Bad form, but just a placeholder example
 
 class DummyTest(unittest.TestCase):
     """Perform dummy tests."""

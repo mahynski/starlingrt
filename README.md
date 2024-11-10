@@ -1,6 +1,6 @@
-![Workflow](https://github.com/mahynski/my_package/actions/workflows/python-app.yml/badge.svg?branch=main)
-[![Documentation Status](https://readthedocs.org/projects/my_package/badge/?version=latest)](https://my_package.readthedocs.io/en/latest/?badge=latest)
-[![codecov](https://codecov.io/gh/mahynski/my_package/branch/main/graph/badge.svg?token=YSLBQ33C7F)](https://codecov.io/gh/mahynski/my_package)
+![Workflow](https://github.com/mahynski/starlingrt/actions/workflows/python-app.yml/badge.svg?branch=main)
+[![Documentation Status](https://readthedocs.org/projects/starlingrt/badge/?version=latest)](https://starlingrt.readthedocs.io/en/latest/?badge=latest)
+[![codecov](https://codecov.io/gh/mahynski/starlingrt/branch/main/graph/badge.svg?token=YSLBQ33C7F)](https://codecov.io/gh/mahynski/starlingrt)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 [![DOI](https://zenodo.org/badge/331207062.svg)](https://zenodo.org/badge/latestdoi/331207062)
 <!--[![DOI](https://zenodo.org/badge/{github_id}.svg)](https://zenodo.org/badge/latestdoi/{github_id})-->
