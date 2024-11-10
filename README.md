@@ -40,3 +40,12 @@ Documentation
 
 Documentation is hosted at [https://startlingrt.readthedocs.io/](https://startlingrt.readthedocs.io/) via [readthedocs](https://about.readthedocs.com/).
 
+Contributors
+===
+
+This code was developed during a collaboration with:
+
+* [Prof. Nives Ogrinc](https://orcid.org/0000-0002-0773-0095)
+* [Dr. Lidija Strojnik](https://orcid.org/0000-0003-1898-9147)
+
+
