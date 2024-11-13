@@ -38,7 +38,7 @@ $ python -m pytest # Optional unittests
 To install this into a Jupyter kernel:
 
 ~~~bash
-$ python -m ipykernel install --user --name my_starlingrt_env --display-name "my_starlingrt_env"
+$ python -m ipykernel install --user --name starlingrt_kernel --display-name "starlingrt_kernel"
 ~~~
 
 Documentation
