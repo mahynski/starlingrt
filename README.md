@@ -41,6 +41,48 @@ To install this into a Jupyter kernel:
 $ python -m ipykernel install --user --name starlingrt_kernel --display-name "starlingrt_kernel"
 ~~~
 
+Example
+===
+
+Here is a simple example (see `docs/_static/example.py`):
+
+~~~python
+import os
+import starlingrt
+
+from starlingrt import sample, data, functions, visualize
+
+def load_mass_hunter(input_directory):
+    """
+    Parameters   
+    ---------
+    input_directory : str
+        Directory to seach for raw folders are in.
+
+    Returns
+    -------
+    samples : list(sample.MassHunterSample)
+        List of Samples collected from all directories in `input_directory`.
+    """
+    ...
+    return samples
+
+top_entries = starlingrt.data.Utilities.select_top_entries(
+    starlingrt.data.Utilities.create_entries(
+        load_mass_hunter(
+            "path/to/data/"
+        )
+    )
+)
+
+starlingrt.visualize.make(
+    top_entries=top_entries, 
+    width=1200,
+    threshold=starlingrt.functions.estimate_threshold(starlingrt.functions.get_dataframe(top_entries)[0]),
+    output_filename='summary.html',
+)
+~~~
+
 Documentation
 ===
 
