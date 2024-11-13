@@ -25,13 +25,14 @@ readme = "README.md"
 license = {file = "LICENSE.md"}
 requires-python = ">=3.10"
 dependencies = [
-    "numpy>=2.0.0",
+    "numpy >= 1.23, <2.0.0",
     "matplotlib>=3.7.2",
-    "pandas==2.1.4",  # For Colab
+    "pandas==2.2",
     "bokeh==3.0.3",
     "xlrd==2.0.1",
     "pre-commit==3.3.3",
-    "pytest==7.4.0",
+    "pytest>=7.4.0",
+    "ipykernel"
 ] 
 
 [project.optional-dependencies]

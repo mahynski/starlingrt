@@ -4,10 +4,11 @@ Author: Nathan A. Mahynski
 
 """
 
-import data
 import xlrd
 
 import numpy as np
+
+from starlingrt import data
 
 from typing import Any
 

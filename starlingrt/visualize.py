@@ -3,7 +3,8 @@ Visualize GCMS data to determine consensus and any corrections necessary.
 Author: Nathan A. Mahynski
 
 """
-import functions, data
+import numpy as np
+from starlingrt import functions, data
 
 from bokeh.plotting import figure, output_file, save
 from bokeh.layouts import column, layout
@@ -180,7 +181,7 @@ def make(top_entries: dict[str, data.Entry], width: int, threshold: float, outpu
     source_current.change.emit();
     """
 
-    compounds_hist, compounds_edges, points = make_histograms(by_name, k_values, bins=10)
+    compounds_hist, compounds_edges, points = functions.make_histograms(by_name, k_values, bins=10)
 
     def compare_factory(dropdown=True):
         compare = figure(

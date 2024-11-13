@@ -8,7 +8,7 @@ import copy
 import hashlib
 import numpy as np
 
-from typing import Any
+from typing import Any, ClassVar
 
 class Entry:
 	"""
@@ -245,9 +245,9 @@ class Compound:
 class _SampleBase:
 	"""Base class to store the output from a mass spectrometer."""
 
-	_filename: str
-	_compounds: list
-	_hits : dict
+	_filename: ClassVar[str]
+	_compounds: ClassVar[list]
+	_hits : ClassVar[dict]
 
 	def __init__(self, filename: str) -> None:
 		"""
@@ -363,7 +363,7 @@ class Utilities:
         total_entries = {}
         checksum = 0
         for sample in samples:
-            for entry in sample.entries():
+            for entry in sample.entries:
                 checksum += 1
                 descr_ = '_'.join(['_'.join([a, str(b)]) for a,b in sorted(list(entry.get_params().items()))])
                 hash_ = hashlib.sha1(descr_.encode('utf-8'))

@@ -4,16 +4,19 @@ Author: Nathan A. Mahynski
 
 """
 
-import load
+import starlingrt
 import bokeh
 import scipy
 
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 
 from numpy.typing import NDArray, ArrayLike
+from typing import Any, Union, Sequence
 
-def flag_entry_rt(entries: list[Entry], min_entries: int = 10, k: float = 3.0, cv: int = 5, style: str = "classical") -> NDArray[np.bool_]:
+
+def flag_entry_rt(entries: list[starlingrt.data.Entry], min_entries: int = 10, k: float = 3.0, cv: int = 5, style: str = "classical") -> NDArray[np.bool_]:
     """
     Flag entries with anomolous retention times based on the group's consensus.
     
@@ -194,7 +197,7 @@ def make_dataframe(entries: dict) -> pd.DataFrame:
     dataframe : pd.DataFrame
         DataFrame of Entries sorted by Hit name.
     """
-    by_name = load.group_entries_by_name(entries) 
+    by_name = starlingrt.data.Utilities.group_entries_by_name(entries) 
     columns = sorted(by_name[list(by_name.keys())[0]][0][0].get_params().keys())
     data = []
     for name in by_name.keys():
