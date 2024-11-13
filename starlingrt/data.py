@@ -16,6 +16,22 @@ class Entry:
 
 	This is essentially a combination of Hit and Compound intended to "unroll" their information into a flat data structure more amenable for searching.
 	"""
+	sample_filename: ClassVar[str]
+	compound_number: ClassVar[int]
+	rt: ClassVar[int]
+	scan_number: ClassVar[int]
+	area: ClassVar[int]
+	baseline_height: ClassVar[int]
+	absolute_height: ClassVar[int]
+	peak_width: ClassVar[float]
+	hit_number: ClassVar[int]
+	hit_name: ClassVar[str]
+	quality: ClassVar[int]
+	mol_weight: ClassVar[float]
+	cas_number: ClassVar[str]
+	library: ClassVar[str]
+	entry_number_library: ClassVar[int]
+
 	def __init__(self, sample_filename: str, compound_number: int, rt: int, scan_number: int, area: int, baseline_height: int, absolute_height: int, peak_width: float, hit_number: int, hit_name: str, quality: int, mol_weight: float, cas_number: str, library: str, entry_number_library: int):
 		"""
 		Initialize the Entry.
@@ -122,6 +138,14 @@ class Hit:
 
 	Each peak (Compound) in the MSRep.xls file > LibRes tab is assigned various Hits.
 	"""
+	number: ClassVar[int]
+	name: ClassVar[str]
+	quality: ClassVar[int]
+	mol_weight: ClassVar[float]
+	cas_number: ClassVar[str]
+	library: ClassVar[str]
+	entry_number_library: ClassVar[int]
+
 	def __init__(self, number: int, name: str, quality: int, mol_weight: float, cas_number: str, library: str, entry_number_library: int) -> None:
 		"""
 		Initialize the Hit.
@@ -185,6 +209,14 @@ class Compound:
 
 	Each peak (Compound) in the MSRep.xls file > LibRes tab is assigned various Hits.
 	"""
+	number: ClassVar[int]
+	rt: ClassVar[float]
+	scan_number: ClassVar[int]
+	area: ClassVar[int]
+	baseline_height: ClassVar[int]
+	absolute_height: ClassVar[int]
+	peak_width: ClassVar[float]
+
 	def __init__(self, number: int, rt: float, scan_number: int, area: int, baseline_height: int, absolute_height: int, peak_width: float) -> None:
 		"""
 		Initialize the Compound.
