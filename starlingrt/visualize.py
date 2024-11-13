@@ -7,10 +7,10 @@ import numpy as np
 from starlingrt import functions, data
 
 from bokeh.plotting import figure, output_file, save
-from bokeh.layouts import column, layout
-from bokeh.models import (ColumnDataSource, DataTable, HoverTool, CrosshairTool, FileInput, CheckboxGroup, Paragraph,
-                          SelectEditor, CustomJS, Segment, VBar, Rect, Button, TextInput, RadioButtonGroup, Span, 
-                          StringFormatter, TableColumn, RangeSlider, Slider, Select, CDSView, IndexFilter, HTMLTemplateFormatter)
+from bokeh.layouts import layout
+from bokeh.models import (ColumnDataSource, DataTable, HoverTool, CrosshairTool, FileInput, # type: ignore [attr-defined]
+                          SelectEditor, CustomJS, Segment, VBar, Rect, Button, TextInput, RadioButtonGroup, Span, # type: ignore [attr-defined]
+                          StringFormatter, TableColumn, RangeSlider, Slider, Select, CDSView, IndexFilter, HTMLTemplateFormatter) # type: ignore [attr-defined]
 
 def make(top_entries: dict[str, data.Entry], width: int, threshold: float, output_filename: str = "summary.html") -> None:
     """

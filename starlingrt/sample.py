@@ -29,7 +29,7 @@ class MassHunterSample(data._SampleBase):
 		filename : str
 			Pathname of MSRep.xls file.
 		"""
-		self._filename = filename
+		self._filename = filename # type: ignore [misc]
 
 		wb = xlrd.open_workbook(self._filename)
 		intres = wb.sheet_by_name('IntRes')
@@ -55,7 +55,7 @@ class MassHunterSample(data._SampleBase):
 		assert(intres.row_values(5) == column_names), f'Column names in the IntRes tab of {self._filename} are not as expected.'
 
 		# Read all compounds
-		self._compounds = [] # List of all compounds identified
+		self._compounds = [] # type: ignore [misc]
 		for row_idx in range(6, intres.nrows):		
 			self._compounds.append(
 				data.Compound(		
@@ -94,7 +94,7 @@ class MassHunterSample(data._SampleBase):
 		assert(libres.row_values(8) == column_names), f'Column names in the LibRes tab of {self._filename} are not as expected.'
 
 		# Hits for each compounds
-		self._hits = {} 
+		self._hits = {} # type: ignore [misc]
 		for row_idx in range(9, libres.nrows):
 			cpd = libres.cell(row_idx, column_names.index('Compound number (#)')).value
 			if cpd:
@@ -114,4 +114,4 @@ class MassHunterSample(data._SampleBase):
 			)
 
 		# Check that all compounds from IntRes are in LibRes
-		assert((sorted(self._hits.keys()) == np.arange(1, len(self._compounds)+1)).all()), f'Hits are either not ordered correctly or are missing for certain compounds in {self._filename}'
+		assert(np.asarray(sorted(self._hits.keys()) == np.arange(1, len(self._compounds)+1)).all()), f'Hits are either not ordered correctly or are missing for certain compounds in {self._filename}' 

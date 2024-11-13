@@ -5,18 +5,18 @@ Author: Nathan A. Mahynski
 """
 
 import starlingrt
-import bokeh
+from starlingrt import data
 import scipy
 
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from numpy.typing import NDArray, ArrayLike
-from typing import Any, Union, Sequence
+from numpy.typing import NDArray
+from typing import Union, Any
 
 
-def flag_entry_rt(entries: list[starlingrt.data.Entry], min_entries: int = 10, k: float = 3.0, cv: int = 5, style: str = "classical") -> NDArray[np.bool_]:
+def flag_entry_rt(entries: list[tuple["starlingrt.data.Entry", str]], min_entries: int = 10, k: float = 3.0, cv: int = 5, style: str = "classical") -> NDArray[np.bool_]:
     """
     Flag entries with anomolous retention times based on the group's consensus.
     
@@ -24,7 +24,7 @@ def flag_entry_rt(entries: list[starlingrt.data.Entry], min_entries: int = 10, k
     
     Parameters
     ----------
-    entries : list(Entry)
+    entries : list(tuple(Entry, str))
         List of entries (e.g., grouped by name) to examine.
 
     min_entries : int, optional(default=10)
@@ -44,31 +44,31 @@ def flag_entry_rt(entries: list[starlingrt.data.Entry], min_entries: int = 10, k
     mask : ndarray(bool)
         Mask of outliers corresponding to the ordering in `entries`.
     """
-    from sklearn.model_selection import KFold
+    from sklearn.model_selection import KFold 
     
     if style == 'classical':
         center_f = np.mean
         spread_f = np.std
     elif style == 'robust':
-        center_f = np.median
+        center_f = np.median # type: ignore [assignment]
         spread_f = scipy.stats.iqr # rng = (25,75) by default
     else:
         raise ValueError(f'Unrecognized style : {style}')
     
-    entries = np.asarray(entries)
-    outlier_mask = np.zeros(len(entries), dtype=bool)
+    entries_ = np.asarray(entries)
+    outlier_mask = np.zeros(len(entries_), dtype=bool)
     
-    if (len(entries) < min_entries) or (len(entries) < cv):
+    if (len(entries_) < min_entries) or (len(entries_) < cv):
         # Do LOOCV instead of KFold CV
-        cv = len(entries)
+        cv = len(entries_)
     
-    if len(entries) < 2:
+    if len(entries_) < 2:
         # Not enough examples to estimate distribution, assuming inliers
         return outlier_mask
     else:
         kf = KFold(n_splits=cv, shuffle=False)
-        retention_times = np.array([e[0].rt for e in entries])
-        for train_index, test_index in kf.split(entries):
+        retention_times = np.array([e[0].rt for e in entries_])
+        for train_index, test_index in kf.split(entries_):
             # Estimate center and spread from training fraction
             rt_train = retention_times[train_index]
             center = center_f(rt_train)
@@ -81,13 +81,13 @@ def flag_entry_rt(entries: list[starlingrt.data.Entry], min_entries: int = 10, k
 
     return outlier_mask
 
-def make_histograms(by_name: dict[str, tuple], k_values: ArrayLike, bins: int = 10, cv: int = 3, style: str = "robust", min_entries: int = 5) -> tuple[dict, dict, dict]:
+def make_histograms(by_name: dict[str, list[tuple["starlingrt.data.Entry", str]]], k_values: NDArray[np.floating], bins: int = 10, cv: int = 3, style: str = "robust", min_entries: int = 5) -> tuple[dict, dict, dict]:
     """
     Make histograms of retention times for each compound by name.
 
     Parameters
     ----------
-    by_name : dict(str, (Entry, str))
+    by_name : dict(str, list(tuple(Entry, str)))
         Dictionary of Entry whose keys are hit names and values are tuples of (Entry, hash).
     
     k_values : array-like
@@ -113,7 +113,7 @@ def make_histograms(by_name: dict[str, tuple], k_values: ArrayLike, bins: int = 
     bin_edges : dict(str, list)
         Bin edges for the histogram of each compound.
 
-    points : dict(str, dict(str, dict(str, list)))
+    points : dict(str, dict(str, dict(str, dict(str, list))))
         Nested dictionary of points which are of concern or not of concern for each `k` value; e.g., points['methane']['3.0']['concern'] = {'x': rention_times, 'y': staggered_bin_counts}.
     """
     histograms = {}
@@ -125,7 +125,7 @@ def make_histograms(by_name: dict[str, tuple], k_values: ArrayLike, bins: int = 
         bin_edges[name] = edges.tolist()
     
     
-    points = {}
+    points: dict[str, dict[str, dict[str, dict[str, list]]]] = {}
     for name in by_name:
         points[name] = {}
         for k in k_values:
@@ -183,7 +183,7 @@ def make_histograms(by_name: dict[str, tuple], k_values: ArrayLike, bins: int = 
 
     return histograms, bin_edges, points
 
-def make_dataframe(entries: dict) -> pd.DataFrame:
+def make_dataframe(entries: dict) -> "pd.DataFrame":
     """
     Create a dataframe out of the entries.
     
@@ -208,7 +208,11 @@ def make_dataframe(entries: dict) -> pd.DataFrame:
     
     return df
 
-def get_dataframe(entries: dict, target: Union[str, None] = None, pm: int = 0) -> tuple[pd.DataFrame, pd.api.typing.DataFrameGroupBy, list]:
+def get_dataframe(
+        entries: dict, 
+        target: Union[str, None] = None, 
+        pm: int = 0
+    ) -> tuple["pd.DataFrame", "pd.api.typing.DataFrameGroupBy", list]: # type: ignore [name-defined]
     """
     Get dataframe centered on a target.
     
@@ -259,7 +263,9 @@ def get_dataframe(entries: dict, target: Union[str, None] = None, pm: int = 0) -
     
     return df.loc[mask], name_groups, order_cats_used
 
-def get_quantiles_df(name_groups: pd.api.typing.DataFrameGroupBy) -> pd.DataFrame:
+def get_quantiles_df(
+        name_groups: "pd.api.typing.DataFrameGroupBy" # type: ignore [name-defined]
+    ) -> "pd.DataFrame":
     """
     Get the 0.25, 0.50, and 0.75 percentiles of the groups.
 
@@ -293,7 +299,7 @@ def get_quantiles_df(name_groups: pd.api.typing.DataFrameGroupBy) -> pd.DataFram
     
     return df
 
-def closest_rt(rt : float, df_iqr : pd.DataFrame) -> str:
+def closest_rt(rt : float, df_iqr : "pd.DataFrame") -> str:
     """
     Suggest the (visible) species with the closest median retention time.
 
@@ -313,9 +319,9 @@ def closest_rt(rt : float, df_iqr : pd.DataFrame) -> str:
     return df_iqr.sort_values(by='q2', axis=0, key=lambda x: (x-rt)**2).iloc[0].new_name
 
 def group_by_rt_step(
-    df: pd.DataFrame,
+    df: "pd.DataFrame",
     threshold: float = 0.04
-) -> list[tuple[int, str, float, float]]:
+) -> list[list[tuple[Any, str, float, float]]]:
     """
     Create groups based on similar retention times.
     
@@ -331,7 +337,7 @@ def group_by_rt_step(
     
     Returns
     -------
-    rt_groups : list(tuples)
+    rt_groups : list(list(tuples))
         List of tuples of (index, hit_name, quality, rt) by group.
     """
     rt_sorted_df = df.sort_values(by='rt', ascending=True)
@@ -351,7 +357,7 @@ def group_by_rt_step(
     return rt_groups
 
 def suggest_names(
-    rt_groups : list[tuple[int, str, float, float]]
+    rt_groups : list[list[tuple[int, str, float, float]]]
 ) -> tuple[list, dict, list]:
     """
     Suggest the best name for group compounds with similar retention times.
@@ -378,7 +384,7 @@ def suggest_names(
     suggested_name = []
     entropy = []
     for i,group in enumerate(rt_groups):
-        probs = {}
+        probs: dict[str, float] = {}
         for entry in group:
             hit_name, quality = entry[1], entry[2]
             if hit_name in probs:
@@ -465,8 +471,8 @@ def assign_suggestions(
     return new_df
 
 def estimate_threshold(
-    df: pd.DataFrame,
-    thresholds: Sequence = np.logspace(-4, 1, 100),
+    df: "pd.DataFrame",
+    thresholds: NDArray = np.logspace(-4, 1, 100),
     display: bool = False,
 ) -> float:
     """
@@ -477,7 +483,7 @@ def estimate_threshold(
     df : pd.DataFrame
         DataFrame of retention times for selected target and any selected neighbors (see `get_dataframe`).
 
-    thresholds : Sequence, optional(default=np.logspace(-4, 1, 100))
+    thresholds : ndarray(float, ndim=1), optional(default=np.logspace(-4, 1, 100))
         Sequence of thresholds to try.
 
     display : bool, optional(default=False)
