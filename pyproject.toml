@@ -34,14 +34,15 @@ dependencies = [
     "xlrd==2.0.1",
     "pre-commit==3.3.3",
     "pytest>=7.4.0",
-    "ipykernel"
-] 
+    "ipykernel",
+    "pre-commit"
+]
 
 [project.optional-dependencies]
 all = []
 
 [tool.pytest.ini_options]
-testpaths = [ 
+testpaths = [
     "tests",
 ]
 

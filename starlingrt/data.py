@@ -1,7 +1,7 @@
 """
 Structures to organize raw data into.
-Author: Nathan A. Mahynski
 
+Author: Nathan A. Mahynski
 """
 
 import copy
@@ -10,380 +10,426 @@ import numpy as np
 
 from typing import Any, ClassVar
 
+
 class Entry:
-	"""
-	Create an Entry.
+    """
+    Create an Entry.
 
-	This is essentially a combination of Hit and Compound intended to "unroll" their information into a flat data structure more amenable for searching.
-	"""
-	sample_filename: ClassVar[str]
-	compound_number: ClassVar[int]
-	rt: ClassVar[int]
-	scan_number: ClassVar[int]
-	area: ClassVar[int]
-	baseline_height: ClassVar[int]
-	absolute_height: ClassVar[int]
-	peak_width: ClassVar[float]
-	hit_number: ClassVar[int]
-	hit_name: ClassVar[str]
-	quality: ClassVar[int]
-	mol_weight: ClassVar[float]
-	cas_number: ClassVar[str]
-	library: ClassVar[str]
-	entry_number_library: ClassVar[int]
+    This is essentially a combination of Hit and Compound intended to "unroll" their information into a flat data structure more amenable for searching.
+    """
 
-	def __init__(self, sample_filename: str, compound_number: int, rt: int, scan_number: int, area: int, baseline_height: int, absolute_height: int, peak_width: float, hit_number: int, hit_name: str, quality: int, mol_weight: float, cas_number: str, library: str, entry_number_library: int):
-		"""
-		Initialize the Entry.
-		
-		Parameters
-		----------
-		sample_filename : str
-			Mass spectrometer output file data was read from.
+    sample_filename: ClassVar[str]
+    compound_number: ClassVar[int]
+    rt: ClassVar[int]
+    scan_number: ClassVar[int]
+    area: ClassVar[int]
+    baseline_height: ClassVar[int]
+    absolute_height: ClassVar[int]
+    peak_width: ClassVar[float]
+    hit_number: ClassVar[int]
+    hit_name: ClassVar[str]
+    quality: ClassVar[int]
+    mol_weight: ClassVar[float]
+    cas_number: ClassVar[str]
+    library: ClassVar[str]
+    entry_number_library: ClassVar[int]
 
-		compound_number : int
-			Compound / peak integer index.
+    def __init__(
+        self,
+        sample_filename: str,
+        compound_number: int,
+        rt: int,
+        scan_number: int,
+        area: int,
+        baseline_height: int,
+        absolute_height: int,
+        peak_width: float,
+        hit_number: int,
+        hit_name: str,
+        quality: int,
+        mol_weight: float,
+        cas_number: str,
+        library: str,
+        entry_number_library: int,
+    ):
+        """
+        Initialize the Entry.
 
-		rt : float
-			Retention time of the peak.
+        Parameters
+        ----------
+        sample_filename : str
+                Mass spectrometer output file data was read from.
 
-		scan_number : int
-			Scan number.
+        compound_number : int
+                Compound / peak integer index.
 
-		area : int
-			Peak area.
+        rt : float
+                Retention time of the peak.
 
-		baseline_height : int
-			Baseline peak height.
+        scan_number : int
+                Scan number.
 
-		absolute_height: int
-			Absolute peak height.
+        area : int
+                Peak area.
 
-		peak_width : float
-			Peak width.
+        baseline_height : int
+                Baseline peak height.
 
-		hit_number : int
-			Number assigned to the hit.
+        absolute_height: int
+                Absolute peak height.
 
-		hit_name : str
-			Hit name assigned by the library used.
+        peak_width : float
+                Peak width.
 
-		quality : int
-			The quality of the identification, as reported by the library.
+        hit_number : int
+                Number assigned to the hit.
 
-		mol_weight : float
-			Molecular weight of the assignment.
+        hit_name : str
+                Hit name assigned by the library used.
 
-		cas_number : str
-			CAS Number of the assigned hit.
+        quality : int
+                The quality of the identification, as reported by the library.
 
-		library : str
-			Library used for identification.
+        mol_weight : float
+                Molecular weight of the assignment.
 
-		entry_number_library : int
-			Number the assigned compount is in the library used.
-		"""
-		self.set_params(
-			**{
-				"sample_filename": sample_filename, 
-				"compound_number": compound_number,
-				"rt": rt,
-				"scan_number": scan_number,
-				"area": area,
-				"baseline_height": baseline_height,
-				"absolute_height": absolute_height,
-				"peak_width": peak_width,
-				"hit_number": hit_number, 
-				"hit_name": hit_name, 
-				"quality": quality, 
-				"mol_weight": mol_weight, 
-				"cas_number": cas_number,
-				"library": library,
-				"entry_number_library": entry_number_library
-			}
-		)
+        cas_number : str
+                CAS Number of the assigned hit.
 
-	def set_params(self, **parameters: Any) -> "Entry":
-		"""Set parameters."""		
-		for parameter, value in parameters.items():
-			setattr(self, parameter, value)
-		return self
+        library : str
+                Library used for identification.
 
-	def get_params(self) -> dict[str, Any]:		
-		"""Get parameters."""		
-		return {		
-			"sample_filename": self.sample_filename, 
-			"compound_number": self.compound_number,
-			"rt": self.rt,
-			"scan_number": self.scan_number,
-			"area": self.area,
-			"baseline_height": self.baseline_height,
-			"absolute_height": self.absolute_height,
-			"peak_width": self.peak_width,
-			"hit_number": self.hit_number, 
-			"hit_name": self.hit_name, 
-			"quality": self.quality, 
-			"mol_weight": self.mol_weight, 
-			"cas_number": self.cas_number,
-			"library": self.library,
-			"entry_number_library": self.entry_number_library
-		}
+        entry_number_library : int
+                Number the assigned compount is in the library used.
+        """
+        self.set_params(
+            **{
+                "sample_filename": sample_filename,
+                "compound_number": compound_number,
+                "rt": rt,
+                "scan_number": scan_number,
+                "area": area,
+                "baseline_height": baseline_height,
+                "absolute_height": absolute_height,
+                "peak_width": peak_width,
+                "hit_number": hit_number,
+                "hit_name": hit_name,
+                "quality": quality,
+                "mol_weight": mol_weight,
+                "cas_number": cas_number,
+                "library": library,
+                "entry_number_library": entry_number_library,
+            }
+        )
 
-	def __repr__(self):
-		return "<Entry at 0x{:x}>".format(id(self))
+    def set_params(self, **parameters: Any) -> "Entry":
+        """Set parameters."""
+        for parameter, value in parameters.items():
+            setattr(self, parameter, value)
+        return self
+
+    def get_params(self) -> dict[str, Any]:
+        """Get parameters."""
+        return {
+            "sample_filename": self.sample_filename,
+            "compound_number": self.compound_number,
+            "rt": self.rt,
+            "scan_number": self.scan_number,
+            "area": self.area,
+            "baseline_height": self.baseline_height,
+            "absolute_height": self.absolute_height,
+            "peak_width": self.peak_width,
+            "hit_number": self.hit_number,
+            "hit_name": self.hit_name,
+            "quality": self.quality,
+            "mol_weight": self.mol_weight,
+            "cas_number": self.cas_number,
+            "library": self.library,
+            "entry_number_library": self.entry_number_library,
+        }
+
+    def __repr__(self):
+        """Self-representation."""
+        return "<Entry at 0x{:x}>".format(id(self))
+
 
 class Hit:
-	"""
-	A possible assignment to a peak from the library in use.
+    """
+    A possible assignment to a peak from the library in use.
 
-	Each peak (Compound) in the MSRep.xls file > LibRes tab is assigned various Hits.
-	"""
-	number: ClassVar[int]
-	name: ClassVar[str]
-	quality: ClassVar[int]
-	mol_weight: ClassVar[float]
-	cas_number: ClassVar[str]
-	library: ClassVar[str]
-	entry_number_library: ClassVar[int]
+    Each peak (Compound) in the MSRep.xls file > LibRes tab is assigned various Hits.
+    """
 
-	def __init__(self, number: int, name: str, quality: int, mol_weight: float, cas_number: str, library: str, entry_number_library: int) -> None:
-		"""
-		Initialize the Hit.
+    number: ClassVar[int]
+    name: ClassVar[str]
+    quality: ClassVar[int]
+    mol_weight: ClassVar[float]
+    cas_number: ClassVar[str]
+    library: ClassVar[str]
+    entry_number_library: ClassVar[int]
 
-		Parameters
-		----------
-		number : int
-			Number assigned to the hit.
+    def __init__(
+        self,
+        number: int,
+        name: str,
+        quality: int,
+        mol_weight: float,
+        cas_number: str,
+        library: str,
+        entry_number_library: int,
+    ) -> None:
+        """
+        Initialize the Hit.
 
-		name : str
-			Hit name assigned by the library used.
+        Parameters
+        ----------
+        number : int
+                Number assigned to the hit.
 
-		quality : int
-			The quality of the identification, as reported by the library.
+        name : str
+                Hit name assigned by the library used.
 
-		mol_weight : float
-			Molecular weight of the assignment.
+        quality : int
+                The quality of the identification, as reported by the library.
 
-		cas_number : str
-			CAS Number of the assigned hit.
+        mol_weight : float
+                Molecular weight of the assignment.
 
-		library : str
-			Library used for identification.
+        cas_number : str
+                CAS Number of the assigned hit.
 
-		entry_number : int
-			Number the assigned compount is in the library used.
-		"""
-		self.set_params(
-			**{
-				"number": int(number), 
-				"name": str(name),
-				"quality": int(quality),
-				"mol_weight": float(mol_weight),
-				"cas_number": str(cas_number),
-				"library": str(library),
-				"entry_number_library": int(entry_number_library)
-			}
-		)
-	
-	def set_params(self, **parameters: Any) -> "Hit":
-		"""Set parameters."""		
-		for parameter, value in parameters.items():
-			setattr(self, parameter, value)
-		return self
+        library : str
+                Library used for identification.
 
-	def get_params(self) -> dict[str, Any]:		
-		"""Get parameters."""		
-		return {		
-			"number": self.number, 
-			"name": self.name,
-			"quality": self.quality,
-			"mol_weight": self.mol_weight,
-			"cas_number": self.cas_number,
-			"library": self.library,
-			"entry_number_library": self.entry_number_library
-		}
+        entry_number : int
+                Number the assigned compount is in the library used.
+        """
+        self.set_params(
+            **{
+                "number": int(number),
+                "name": str(name),
+                "quality": int(quality),
+                "mol_weight": float(mol_weight),
+                "cas_number": str(cas_number),
+                "library": str(library),
+                "entry_number_library": int(entry_number_library),
+            }
+        )
+
+    def set_params(self, **parameters: Any) -> "Hit":
+        """Set parameters."""
+        for parameter, value in parameters.items():
+            setattr(self, parameter, value)
+        return self
+
+    def get_params(self) -> dict[str, Any]:
+        """Get parameters."""
+        return {
+            "number": self.number,
+            "name": self.name,
+            "quality": self.quality,
+            "mol_weight": self.mol_weight,
+            "cas_number": self.cas_number,
+            "library": self.library,
+            "entry_number_library": self.entry_number_library,
+        }
+
 
 class Compound:
-	"""
-	A compound is a peak in the GCMS output that has been detected and must be assigned to one or more library Hits.
+    """
+    A compound is a peak in the GCMS output that has been detected and must be assigned to one or more library Hits.
 
-	Each peak (Compound) in the MSRep.xls file > LibRes tab is assigned various Hits.
-	"""
-	number: ClassVar[int]
-	rt: ClassVar[float]
-	scan_number: ClassVar[int]
-	area: ClassVar[int]
-	baseline_height: ClassVar[int]
-	absolute_height: ClassVar[int]
-	peak_width: ClassVar[float]
+    Each peak (Compound) in the MSRep.xls file > LibRes tab is assigned various Hits.
+    """
 
-	def __init__(self, number: int, rt: float, scan_number: int, area: int, baseline_height: int, absolute_height: int, peak_width: float) -> None:
-		"""
-		Initialize the Compound.
+    number: ClassVar[int]
+    rt: ClassVar[float]
+    scan_number: ClassVar[int]
+    area: ClassVar[int]
+    baseline_height: ClassVar[int]
+    absolute_height: ClassVar[int]
+    peak_width: ClassVar[float]
 
-		Parameters
-		----------
-		number : int
-			Compound / peak integer index.
+    def __init__(
+        self,
+        number: int,
+        rt: float,
+        scan_number: int,
+        area: int,
+        baseline_height: int,
+        absolute_height: int,
+        peak_width: float,
+    ) -> None:
+        """
+        Initialize the Compound.
 
-		rt : float
-			Retention time of the peak.
+        Parameters
+        ----------
+        number : int
+                Compound / peak integer index.
 
-		scan_number : int
-			Scan number.
+        rt : float
+                Retention time of the peak.
 
-		area : int
-			Peak area.
+        scan_number : int
+                Scan number.
 
-		baseline_height : int
-			Baseline peak height.
+        area : int
+                Peak area.
 
-		absolute_height: int
-			Absolute peak height.
+        baseline_height : int
+                Baseline peak height.
 
-		peak_width : float
-			Peak width.
-		"""
-		self.set_params(
-			**{
-				"number": int(number), 
-				"rt": float(rt),
-				"scan_number": int(scan_number),
-				"area": int(area),
-				"baseline_height": int(baseline_height),
-				"absolute_height": int(absolute_height),
-				"peak_width": float(peak_width)
-			}
-		)
+        absolute_height: int
+                Absolute peak height.
 
-	def set_params(self, **parameters: Any) -> "Compound":
-		"""Set parameters."""
-		for parameter, value in parameters.items():
-			setattr(self, parameter, value)
-		return self
+        peak_width : float
+                Peak width.
+        """
+        self.set_params(
+            **{
+                "number": int(number),
+                "rt": float(rt),
+                "scan_number": int(scan_number),
+                "area": int(area),
+                "baseline_height": int(baseline_height),
+                "absolute_height": int(absolute_height),
+                "peak_width": float(peak_width),
+            }
+        )
 
-	def get_params(self) -> dict[str, Any]:		
-		"""Get parameters."""		
-		return {		
-			"number": self.number, 
-			"rt": self.rt,
-			"scan_number": self.scan_number,
-			"area": self.area,
-			"baseline_height": self.baseline_height,
-			"absolute_height": self.absolute_height,
-			"peak_width": self.peak_width
-		}
+    def set_params(self, **parameters: Any) -> "Compound":
+        """Set parameters."""
+        for parameter, value in parameters.items():
+            setattr(self, parameter, value)
+        return self
+
+    def get_params(self) -> dict[str, Any]:
+        """Get parameters."""
+        return {
+            "number": self.number,
+            "rt": self.rt,
+            "scan_number": self.scan_number,
+            "area": self.area,
+            "baseline_height": self.baseline_height,
+            "absolute_height": self.absolute_height,
+            "peak_width": self.peak_width,
+        }
+
 
 class _SampleBase:
-	"""Base class to store the output from a mass spectrometer."""
+    """Base class to store the output from a mass spectrometer."""
 
-	_filename: ClassVar[str]
-	_compounds: ClassVar[list]
-	_hits : ClassVar[dict]
+    _filename: ClassVar[str]
+    _compounds: ClassVar[list]
+    _hits: ClassVar[dict]
 
-	def __init__(self, filename: str) -> None:
-		"""
-		Instantiate the Sample.
+    def __init__(self, filename: str) -> None:
+        """
+        Instantiate the Sample.
 
-		Parameters
-		----------
-		filename : str
-			Path to mass spectrometer output file to read.
-		"""
-		try:
-			self.read(filename)
-		except Exception as e:
-			raise IOError(f"Unable to read from {filename} : {e}")
+        Parameters
+        ----------
+        filename : str
+                Path to mass spectrometer output file to read.
+        """
+        try:
+            self.read(filename)
+        except Exception as e:
+            raise IOError(f"Unable to read from {filename} : {e}")
 
-	@property
-	def filename(self):
-		return copy.copy(self._filename)
+    @property
+    def filename(self):
+        return copy.copy(self._filename)
 
-	@property
-	def compounds(self):
-		return copy.copy(self._compounds)
+    @property
+    def compounds(self):
+        return copy.copy(self._compounds)
 
-	@property
-	def hits(self):
-		return copy.copy(self._hits)
+    @property
+    def hits(self):
+        return copy.copy(self._hits)
 
-	@property
-	def entries(self) -> list[Entry]:
-		"""
-		Extract all Entry from Samples.
-		
-		Returns
-		----------
-		all_entries : list(Entry)
-			List of all Entry created from known Samples and their Hits.
-		"""
-		all_entries = []
-		for compound in self._compounds:
-			for hit in self.sorted_hits(compound.number):
-				all_entries.append(
-					Entry(
-						sample_filename="/".join(self._filename.split('/')[-2:]), # Only use 1 level in directory
-						compound_number=compound.number,
-						rt=compound.rt,
-						scan_number=compound.scan_number,
-						area=compound.area,
-						baseline_height=compound.baseline_height,
-						absolute_height=compound.absolute_height,
-						peak_width=compound.peak_width,
-						hit_number=hit.number, 
-						hit_name=hit.name,
-						quality=hit.quality,
-						mol_weight=hit.mol_weight,
-						cas_number=hit.cas_number,
-						library=hit.library,
-						entry_number_library=hit.entry_number_library
-					)
-				)
+    @property
+    def entries(self) -> list[Entry]:
+        """
+        Extract all Entry from Samples.
 
-		return all_entries
+        Returns
+        ----------
+        all_entries : list(Entry)
+                List of all Entry created from known Samples and their Hits.
+        """
+        all_entries = []
+        for compound in self._compounds:
+            for hit in self.sorted_hits(compound.number):
+                all_entries.append(
+                    Entry(
+                        sample_filename="/".join(
+                            self._filename.split("/")[-2:]
+                        ),  # Only use 1 level in directory
+                        compound_number=compound.number,
+                        rt=compound.rt,
+                        scan_number=compound.scan_number,
+                        area=compound.area,
+                        baseline_height=compound.baseline_height,
+                        absolute_height=compound.absolute_height,
+                        peak_width=compound.peak_width,
+                        hit_number=hit.number,
+                        hit_name=hit.name,
+                        quality=hit.quality,
+                        mol_weight=hit.mol_weight,
+                        cas_number=hit.cas_number,
+                        library=hit.library,
+                        entry_number_library=hit.entry_number_library,
+                    )
+                )
 
-	def sorted_hits(self, compound_number: int) -> list[Hit]:
-		"""
-		Hits should be sorted by quality, but this makes sure. 
+        return all_entries
 
-		A secondary sort is done by hit number to be consistent with mass spectrometer's ordering.
+    def sorted_hits(self, compound_number: int) -> list[Hit]:
+        """
+        Hits should be sorted by quality, but this makes sure.
 
-		Parameters
-		----------
-		compound_number : int
-			Compound number (starting from 1) in the mass spectrometer's output file.
+        A secondary sort is done by hit number to be consistent with mass spectrometer's ordering.
 
-		Returns
-		-------
-		hits : list(Hit)
-			Hits sorted first by quality and then by the number the mass spectrometer assigned when it performed this sort.
+        Parameters
+        ----------
+        compound_number : int
+                Compound number (starting from 1) in the mass spectrometer's output file.
 
-		Example
-		-------
-		>>> s = Sample(...)
-		>>> sorted_hits = s.sorted_hits(compound_number=42)
-		"""
-		return sorted(self._hits[compound_number], key=lambda x: (x.get_params().get('quality'), -x.get_params().get('number')), reverse=True) # type: ignore [operator]
+        Returns
+        -------
+        hits : list(Hit)
+                Hits sorted first by quality and then by the number the mass spectrometer assigned when it performed this sort.
 
-	def read(self, *args, **kwargs) -> None:
-		"""
-		Function to read in the data from mass spectrometer output files.
+        Example
+        -------
+        >>> s = Sample(...)
+        >>> sorted_hits = s.sorted_hits(compound_number=42)
+        """
+        return sorted(self._hits[compound_number], key=lambda x: (x.get_params().get("quality"), -x.get_params().get("number")), reverse=True)  # type: ignore [operator]
+
+    def read(self, *args, **kwargs) -> None:
+        """
+        Read in the data from mass spectrometer output files.
 
         Should set the class variables:
         * _filename
         * _compounds
         * _hits
-		"""
-		raise NotImplementedError
+        """
+        raise NotImplementedError
+
 
 class Utilities:
     """Utility functions for manipulating data structures."""
-    
+
     @staticmethod
     def create_entries(samples: list) -> dict[str, Entry]:
         """
         Extract all Entry from samples.
-        
+
         Parameters
         ----------
         samples : list(_SampleBase)
@@ -399,18 +445,23 @@ class Utilities:
         for sample in samples:
             for entry in sample.entries:
                 checksum += 1
-                descr_ = '_'.join(['_'.join([a, str(b)]) for a,b in sorted(list(entry.get_params().items()))])
-                hash_ = hashlib.sha1(descr_.encode('utf-8'))
+                descr_ = "_".join(
+                    [
+                        "_".join([a, str(b)])
+                        for a, b in sorted(list(entry.get_params().items()))
+                    ]
+                )
+                hash_ = hashlib.sha1(descr_.encode("utf-8"))
                 total_entries[hash_.hexdigest()] = entry
 
-        assert(len(total_entries) == checksum), 'Error : hash conflicts found'
+        assert len(total_entries) == checksum, "Error : hash conflicts found"
         return total_entries
 
     @staticmethod
     def select_top_entries(total_entries: dict[str, Entry]) -> dict[str, Entry]:
         """
         Trim down the entries to just have the top (quality) hits (i.e., `hit_number` == 1).
-        
+
         Parameters
         ----------
         total_entries : dict(str, Entry)
@@ -422,17 +473,19 @@ class Utilities:
             Dictionary of all Entry with `hit_number` == 1 whose keys are sha1 hashes and values are Entry objects.
         """
         top_entries = {}
-        for k,v in total_entries.items():
+        for k, v in total_entries.items():
             if v.hit_number == 1:
                 top_entries[k] = v
-        
+
         return top_entries
 
     @staticmethod
-    def group_entries_by_name(entries: dict[str, Entry]) -> dict[str, list[tuple[Entry, str]]]:
+    def group_entries_by_name(
+        entries: dict[str, Entry]
+    ) -> dict[str, list[tuple[Entry, str]]]:
         """
         Group entries with the same hit name.
-        
+
         Parameters
         ----------
         entries : dict(str, Entry)
@@ -453,10 +506,12 @@ class Utilities:
         return groups
 
     @staticmethod
-    def group_entries_by_rt(entries: dict[str, Entry]) -> dict[float, list[Entry]]:
+    def group_entries_by_rt(
+        entries: dict[str, Entry]
+    ) -> dict[float, list[Entry]]:
         """
         Group entries with the same retention time.
-        
+
         Parameters
         ----------
         entries : dict(str, Entry)

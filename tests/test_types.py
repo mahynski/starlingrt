@@ -1,8 +1,8 @@
 """
 Unittests for mypy typing.
-author: Nathan A. Mahynski
 
-credit: @bbarker, https://gist.github.com/bbarker/4ddf4a1c58ae8465f3d37b6f2234a421
+Author: Nathan A. Mahynski
+Credit: @bbarker, https://gist.github.com/bbarker/4ddf4a1c58ae8465f3d37b6f2234a421
 """
 import os
 import glob
