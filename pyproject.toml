@@ -35,7 +35,8 @@ dependencies = [
     "pre-commit==3.3.3",
     "pytest>=7.4.0",
     "ipykernel",
-    "pre-commit"
+    "pre-commit",
+    "mypy"
 ]
 
 [project.optional-dependencies]
