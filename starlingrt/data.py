@@ -342,7 +342,7 @@ class _SampleBase:
 
 		return all_entries
 
-	def sorted_hits(self, compound_number: int) -> dict[int, Hit]:
+	def sorted_hits(self, compound_number: int) -> list[Hit]:
 		"""
 		Hits should be sorted by quality, but this makes sure. 
 
@@ -355,7 +355,7 @@ class _SampleBase:
 
 		Returns
 		-------
-		hits : dict(int, Hit)
+		hits : list(Hit)
 			Hits sorted first by quality and then by the number the mass spectrometer assigned when it performed this sort.
 
 		Example
@@ -363,15 +363,17 @@ class _SampleBase:
 		>>> s = Sample(...)
 		>>> sorted_hits = s.sorted_hits(compound_number=42)
 		"""
-		return sorted(self._hits[compound_number], key=lambda x: (x.get_params().get('quality'), -x.get_params().get('number')), reverse=True)
+		return sorted(self._hits[compound_number], key=lambda x: (x.get_params().get('quality'), -x.get_params().get('number')), reverse=True) # type: ignore [operator]
 
 	def read(self, *args, **kwargs) -> None:
 		"""
 		Function to read in the data from mass spectrometer output files.
+
+        Should set the class variables:
+        * _filename
+        * _compounds
+        * _hits
 		"""
-		self._filename = ""
-		self._compounds = []
-		self._hits = {}
 		raise NotImplementedError
 
 class Utilities:
@@ -427,7 +429,7 @@ class Utilities:
         return top_entries
 
     @staticmethod
-    def group_entries_by_name(entries: dict[str, Entry]) -> dict[str, tuple[Entry, str]]:
+    def group_entries_by_name(entries: dict[str, Entry]) -> dict[str, list[tuple[Entry, str]]]:
         """
         Group entries with the same hit name.
         
@@ -438,11 +440,11 @@ class Utilities:
 
         Returns
         -------
-        groups : dict(str, (Entry, str))
+        groups : dict(str, list(tuple(Entry, str)))
             Dictionary of Entry whose keys are hit names and values are tuples of (Entry objects, hash).
         """
-        groups = {}
-        for hash,entry in entries.items():
+        groups: dict[str, list[tuple[Entry, str]]] = {}
+        for hash, entry in entries.items():
             if entry.hit_name in groups:
                 groups[entry.hit_name].append((entry, hash))
             else:
@@ -451,7 +453,7 @@ class Utilities:
         return groups
 
     @staticmethod
-    def group_entries_by_rt(entries: dict[str, Entry]) -> dict[str, Entry]:
+    def group_entries_by_rt(entries: dict[str, Entry]) -> dict[float, list[Entry]]:
         """
         Group entries with the same retention time.
         
@@ -462,10 +464,10 @@ class Utilities:
 
         Returns
         -------
-        groups : dict(str, Entry)
+        groups : dict(float, list(Entry))
             Dictionary of Entry whose keys are retention times and values are Entry objects.
         """
-        groups = {}
+        groups: dict[float, list[Entry]] = {}
         for entry in entries.values():
             if entry.rt in groups:
                 groups[entry.rt].append(entry)
