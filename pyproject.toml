@@ -36,7 +36,8 @@ dependencies = [
     "pytest>=7.4.0",
     "ipykernel",
     "pre-commit",
-    "mypy"
+    "mypy",
+    "sphinx"
 ]
 
 [project.optional-dependencies]

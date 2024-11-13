@@ -8,8 +8,7 @@ from starlingrt import functions, data
 
 from bokeh.plotting import figure, output_file, save
 from bokeh.layouts import layout
-from bokeh.models import ColumnDataSource, DataTable, HoverTool  # type: ignore [attr-defined]
-from bokeh.models import HoverTool, CrosshairTool, FileInput, SelectEditor, CustomJS, Segment, VBar, Rect, Button, TextInput, RadioButtonGroup, Span, StringFormatter, TableColumn, RangeSlider, Slider, Select, CDSView, IndexFilter, HTMLTemplateFormatter  # type: ignore [attr-defined]
+from bokeh.models import ColumnDataSource, DataTable, HoverTool, HoverTool, CrosshairTool, FileInput, SelectEditor, CustomJS, Segment, VBar, Rect, Button, TextInput, RadioButtonGroup, Span, StringFormatter, TableColumn, RangeSlider, Slider, Select, CDSView, IndexFilter, HTMLTemplateFormatter  # type: ignore [attr-defined]
 
 
 def make(
