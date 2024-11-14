@@ -4,4 +4,4 @@ Tutorial
 .. nbgallery::
    :hidden:
 
-   _static/example
+   _static/sample
