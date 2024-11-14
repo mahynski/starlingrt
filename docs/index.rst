@@ -43,6 +43,47 @@ Example
 ###################
 
 
+Here is a simple example (see `docs/_static/example.py`):
+
+.. code::python
+
+import os
+import starlingrt
+
+from starlingrt import sample, data, functions, visualize
+
+def load_mass_hunter(input_directory):
+    """
+    Parameters   
+    ---------
+    input_directory : str
+        Directory to seach for raw folders are in.
+
+    Returns
+    -------
+    samples : list(sample.MassHunterSample)
+        List of Samples collected from all directories in `input_directory`.
+    """
+    ...
+    return samples
+
+top_entries = starlingrt.data.Utilities.select_top_entries(
+    starlingrt.data.Utilities.create_entries(
+        load_mass_hunter(
+            "path/to/data/"
+        )
+    )
+)
+
+starlingrt.visualize.make(
+    top_entries=top_entries, 
+    width=1200,
+    threshold=starlingrt.functions.estimate_threshold(starlingrt.functions.get_dataframe(top_entries)[0]),
+    output_filename='summary.html',
+)
+
+
+
 License Information
 ###################
 * See `LICENSE.md <https://github.com/mahynski/starlingrt/blob/main/LICENSE.md>`_ for more information.
@@ -51,7 +92,13 @@ License Information
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Tutorial
+
+.. toctree::
+   :maxdepth: 3
+   :caption: API Reference
+
+   modules
 
 Indices and tables
 ==================
