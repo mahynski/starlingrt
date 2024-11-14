@@ -97,9 +97,10 @@ License Information
 
 .. toctree::
    :maxdepth: 2
-   :caption: Tutorial
+   :caption: Tutorials
 
-   tutorial
+   install
+   examples
 
 .. toctree::
    :maxdepth: 3
