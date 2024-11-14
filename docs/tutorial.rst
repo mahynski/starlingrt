@@ -1,8 +1,6 @@
 Tutorial
 ========
 
-asdfasdfs
-
 .. nbgallery::
 
-   _static/sample
+   jupyter/sample
