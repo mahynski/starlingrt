@@ -2,7 +2,6 @@ Tutorial
 ========
 
 .. nbgallery::
-    :hidden:
 
    jupyter/mass_hunter
 
