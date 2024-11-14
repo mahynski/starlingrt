@@ -17,6 +17,27 @@ starlingrt documentation
 .. image:: https://zenodo.org/badge/331207062.svg
    :target: https://zenodo.org/badge/latestdoi/331207062
 
+.. image:: ./_static/logo.png
+   :height: 100
+   :align: left
+
+STARLINGrt is a tool for analyzing retention times from gas chromatogaphy.  It can be used to compare times for the same substance to determine a consensus value by visualizing results from a library.  At the moment it is configured to work with the outputs from `MassHunter(TM) <https://www.agilent.com/en/product/software-informatics/mass-spectrometry-software>`_ but is extensible by subclassing "data._SampleBase" (see samples.py for an example).  The code produces an interactive HTML file using `Bokeh <https://bokeh.org/>`_ which can be modified interactively, saved, exported and shared easily between different users.  The name "starling" was selected as a reverse acronym of the tool's purpose.
+
+Use Cases
+===
+
+Imagine you have multiple GCMS output files which have been used to identify chemicals using a library. 
+In principle, these could correspond to analyses of a range of different mixtures, but we would expect unique individual components to elute at the same point regardless of what it is combined with.
+There will be natural variations in the peak locations and we would like to learn things like:
+
+1. What is a consensus value, or at least a natural range, for each chemical identified?
+2. What compounds elute at similar points and are commonly confused with each other?
+3. Are there any analyses that identify peaks which are far away from their consensus peak?
+4. What is a natural "gap" in retention times that can be used to divide all compounds from their "neighbors"?
+
+An interactive visualization tool helps users answer these questions by exploring their data with interactive graphs.
+The output of this tool is an HTML file that acts as a self-contained summary of your data, how you cleaned / modified it, and an be easily shared between users.
+
 License Information
 ###################
 * See `LICENSE.md <https://github.com/mahynski/starlingrt/blob/main/LICENSE.md>`_ for more information.
