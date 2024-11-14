@@ -46,6 +46,21 @@ $ conda activate starlingrt-env
 $ python -m ipykernel install --user --name starlingrt-kernel --display-name "starlingrt-kernel"
 ~~~
 
+Use Cases
+===
+
+Imagine you have multiple GCMS output files which have been used to identify chemicals using a library. 
+In principle, these could correspond to analyses of a range of different mixtures, but we would expect unique individual components to elute at the same point regardless of what it is combined with.
+There will be natural variations in the peak locations and we would like to learn things like:
+
+1. What is a consensus value, or at least a natural range, for each chemical identified?
+2. What compounds elute at similar points and are commonly confused with each other?
+3. Are there any analyses that identify peaks which are far away from their consensus peak?
+4. What is a natural "gap" in retention times that can be used to divide all compounds from their "neighbors"?
+
+An interactive visualization tool helps users answer these questions by exploring their data with interactive graphs.
+The output of this tool is an HTML file that acts as a self-contained summary of your data, how you cleaned / modified it, and an be easily shared between users.
+
 Example
 ===
 
