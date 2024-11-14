@@ -42,7 +42,6 @@ The output of this tool is an HTML file that acts as a self-contained summary of
 Example
 ###################
 
-
 Here is a simple example (see `docs/_static/example.py`):
 
 .. code::python
@@ -83,6 +82,12 @@ starlingrt.visualize.make(
 )
 
 
+Contributors
+###################
+This code was developed during a collaboration with:
+
+* [Prof. Nives Ogrinc](https://orcid.org/0000-0002-0773-0095)
+* [Dr. Lidija Strojnik](https://orcid.org/0000-0003-1898-9147)
 
 License Information
 ###################
@@ -93,6 +98,8 @@ License Information
 .. toctree::
    :maxdepth: 2
    :caption: Tutorial
+
+   tutorial
 
 .. toctree::
    :maxdepth: 3
