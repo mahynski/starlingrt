@@ -106,7 +106,7 @@ starlingrt.visualize.make(
 Documentation
 ===
 
-Documentation is hosted at [https://startlingrt.readthedocs.io/](https://startlingrt.readthedocs.io/) via [readthedocs](https://about.readthedocs.com/).
+Documentation is hosted at [https://starlingrt.readthedocs.io/](https://starlingrt.readthedocs.io/) via [readthedocs](https://about.readthedocs.com/).
 
 The logo was generated using Google Gemini with the prompt "Design a logo involving a starling and gas chromatography" on Nov. 9, 2024.
 
