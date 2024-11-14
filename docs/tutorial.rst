@@ -1,7 +1,8 @@
 Tutorial
 ========
 
+asdfasdfs
+
 .. nbgallery::
-   :hidden:
 
    _static/sample
