@@ -17,10 +17,10 @@ starlingrt documentation
 .. image:: https://zenodo.org/badge/331207062.svg
    :target: https://zenodo.org/badge/latestdoi/331207062
 
+
 .. image:: ./_static/logo.png
    :height: 100
    :align: left
-
 
 STARLINGrt is a tool for analyzing retention times from gas chromatogaphy.  It can be used to compare times for the same substance to determine a consensus value by visualizing results from a library.  At the moment it is configured to work with the outputs from `MassHunter(TM) <https://www.agilent.com/en/product/software-informatics/mass-spectrometry-software>`_ but is extensible by subclassing "data._SampleBase" (see samples.py for an example).  The code produces an interactive HTML file using `Bokeh <https://bokeh.org/>`_ which can be modified interactively, saved, exported and shared easily between different users.  The name "starling" was selected as a reverse acronym of the tool's purpose.
 
@@ -101,6 +101,7 @@ License Information
 
    install
    examples
+   demo
 
 .. toctree::
    :maxdepth: 3
