@@ -2,5 +2,4 @@ Demo
 ========
 
 .. raw:: html
-
-   :file: jupyter/summary.html
+    :file: jupyter/summary.html
