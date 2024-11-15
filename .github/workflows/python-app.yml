@@ -30,9 +30,6 @@ jobs:
     - name: Run unittests
       run: |
         python -m pytest
-    - name: Install coverage dependencies
-      run: |
-        pip install coverage
     - name: Test coverage
       run: |
         pytest --cov --cov-report=xml
