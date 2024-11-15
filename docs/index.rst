@@ -17,6 +17,7 @@ starlingrt documentation
 .. image:: https://zenodo.org/badge/331207062.svg
    :target: https://zenodo.org/badge/latestdoi/331207062
 
+----
 
 .. image:: ./_static/logo.png
    :height: 100
