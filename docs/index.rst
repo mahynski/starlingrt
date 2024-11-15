@@ -10,7 +10,7 @@ starlingrt documentation
    :target: https://github.com/mahynski/starlingrt/actions
 .. image:: https://readthedocs.org/projects/starlingrt/badge/?version=latest
    :target: https://starlingrt.readthedocs.io/en/latest/?badge=latest
-.. image:: https://codecov.io/gh/mahynski/starlingrt/branch/main/graph/badge.svg?token=YSLBQ33C7F
+.. image:: https://codecov.io/gh/mahynski/starlingrt/graph/badge.svg?token=7EILPHJ40F 
    :target: https://codecov.io/gh/mahynski/starlingrt
 .. image:: https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white
    :target: https://github.com/pre-commit/pre-commit
