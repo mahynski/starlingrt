@@ -90,8 +90,8 @@ Contributors
 ###################
 This code was developed during a collaboration with:
 
-* [Prof. Nives Ogrinc](https://orcid.org/0000-0002-0773-0095)
-* [Dr. Lidija Strojnik](https://orcid.org/0000-0003-1898-9147)
+* `Prof. Nives Ogrinc <https://orcid.org/0000-0002-0773-0095`_
+* `Dr. Lidija Strojnik <https://orcid.org/0000-0003-1898-9147>`_
 
 License Information
 ###################
