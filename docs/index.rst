@@ -22,22 +22,25 @@ starlingrt documentation
    :height: 100
    :align: left
 
-STARLINGrt is a tool for analyzing retention times from gas chromatogaphy.  It can be used to compare times for the same substance to determine a consensus value by visualizing results from a library.  At the moment it is configured to work with the outputs from `MassHunter(TM) <https://www.agilent.com/en/product/software-informatics/mass-spectrometry-software>`_ but is extensible by subclassing "data._SampleBase" (see samples.py for an example).  The code produces an interactive HTML file using `Bokeh <https://bokeh.org/>`_ which can be modified interactively, saved, exported and shared easily between different users.  The name "starling" was selected as a reverse acronym of the tool's purpose.
+STARLINGrt is a tool for analyzing retention times from gas chromatogaphy mass spectrometry (GCMS).  It can be used to determine a consensus value for compounds by visualizing a collection of results.  Compound identification(s) made at a given retention time are assumed to be provided by a separate code which analyzes the mass spectrometry data collected at that time.  Currently, STARLINGrt is configured to work with the outputs from `MassHunter(TM) <https://www.agilent.com/en/product/software-informatics/mass-spectrometry-software>`_ but is extensible by subclassing "data._SampleBase" (see samples.py for an example).  The code produces an interactive HTML file using `Bokeh <https://bokeh.org/>`_ which can be modified interactively, saved, exported and shared easily between different users.  The name "starling" was selected as a reverse acronym of the tool's purpose.
 
 Use Cases
 ###################
 
-Imagine you have multiple GCMS output files which have been used to identify chemicals using a library. 
-In principle, these could correspond to analyses of a range of different mixtures, but we would expect unique individual components to elute at the same point regardless of what it is combined with.
-There will be natural variations in the peak locations and we would like to learn things like:
+Imagine you have multiple GCMS output files which have been used to identify chemicals at different retention times, e.g., using some sort of library. 
+In principle, these could correspond to analyses of a range of different mixtures; regardless, an individual component should elute at the same time regardless of what it is combined with. However, natural variations in:
 
-1. What is a consensus value, or at least a natural range, for each chemical identified?
+* the retention times can cause confusion when other compounds coelute or elute at very similar times,
+* the mass spectrometry peak location(s) at a given retention time can cause the identification routine to identify the same compound differently.
+
+Given these uncertainties we would like to learn things like:
+
+1. What is a consensus value, or at least a natural range, of retention times for each compound identified?
 2. What compounds elute at similar points and are commonly confused with each other?
-3. Are there any analyses that identify peaks which are far away from their consensus peak?
-4. What is a natural "gap" in retention times that can be used to divide all compounds from their "neighbors"?
+3. Are there any analyses that identify a compound at a retention time far away from its consensus value (data cleaning)?
+4. What is a natural "gap" in retention times that can be used to "ideally" divide all compounds from their "neighbors"?
 
-An interactive visualization tool helps users answer these questions by exploring their data with interactive graphs.
-The output of this tool is an HTML file that acts as a self-contained summary of your data, how you cleaned / modified it, and an be easily shared between users.
+This visualization tool helps users answer these questions by exploring their data with interactive graphs. The output of this tool is an HTML file that acts as a self-contained summary of your data, how you cleaned / modified it, and an be easily shared between users.
 
 Example
 ###################
