@@ -2,8 +2,7 @@
 [![Documentation Status](https://readthedocs.org/projects/starlingrt/badge/?version=latest)](https://starlingrt.readthedocs.io/en/latest/?badge=latest)
 [![codecov](https://codecov.io/gh/mahynski/starlingrt/graph/badge.svg?token=7EILPHJ40F)](https://codecov.io/gh/mahynski/starlingrt)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
-[![DOI](https://zenodo.org/badge/331207062.svg)](https://zenodo.org/badge/latestdoi/331207062)
-<!--[![DOI](https://zenodo.org/badge/{github_id}.svg)](https://zenodo.org/badge/latestdoi/{github_id})-->
+[![DOI](https://zenodo.org/badge/886299192.svg)](https://doi.org/10.5281/zenodo.14170132)
 
 STARLINGrt : [I]nteractive [R]etention [T]ime vi[S]ualization for gas chromatography
 ===
