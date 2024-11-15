@@ -22,8 +22,6 @@ starlingrt documentation
    :height: 100
    :align: left
 
-|
-
 STARLINGrt is a tool for analyzing retention times from gas chromatogaphy mass spectrometry (GCMS).  It can be used to determine a consensus value for compounds by visualizing a collection of results.  Compound identification(s) made at a given retention time are assumed to be provided by a separate code which analyzes the mass spectrometry data collected at that time.  Currently, STARLINGrt is configured to work with the outputs from `MassHunter(TM) <https://www.agilent.com/en/product/software-informatics/mass-spectrometry-software>`_ but is extensible by subclassing "data._SampleBase" (see samples.py for an example).  The code produces an interactive HTML file using `Bokeh <https://bokeh.org/>`_ which can be modified interactively, saved, exported and shared easily between different users.  The name "starling" was selected as a reverse acronym of the tool's purpose.
 
 Use Cases
@@ -106,7 +104,6 @@ License Information
 
    install
    examples
-   demo
 
 .. toctree::
    :maxdepth: 3
