@@ -56,7 +56,7 @@ Given these uncertainties we would like to learn things like:
 3. Are there any analyses that identify a compound at a retention time far away from its consensus value (data cleaning)?
 4. What is a natural "gap" in retention times that can be used to "ideally" divide all compounds from their "neighbors"?
 
-This visualization tool helps users answer these questions by exploring their data with interactive graphs. The output of this tool is an HTML file that acts as a self-contained summary of your data, how you cleaned / modified it, and an be easily shared between users.
+This visualization tool helps users answer these questions by exploring their data with interactive graphs. The output of this tool is an HTML file that acts as a self-contained summary of your data, how you cleaned / modified it, and can be easily shared between users.
 
 Example
 ===
