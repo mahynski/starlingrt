@@ -105,7 +105,7 @@ Documentation
 
 Documentation is hosted at [https://starlingrt.readthedocs.io/](https://starlingrt.readthedocs.io/) via [readthedocs](https://about.readthedocs.com/).
 
-The logo was generated using Google Gemini with the prompt "Design a logo involving a starling and gas chromatography" on Nov. 9, 2024.
+The logo was generated using Google Gemini (Imagen 3) with the prompt "Design a logo involving a starling and gas chromatography" on Nov. 9, 2024.
 
 Contributors
 ===
