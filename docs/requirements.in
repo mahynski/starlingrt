@@ -9,6 +9,6 @@ scipy
 scikit-learn
 matplotlib>=3.7.2
 pandas==2.2
-bokeh==3.0.3
+bokeh==3.8.2
 xlrd==2.0.1
 pytest>=9.0.3
