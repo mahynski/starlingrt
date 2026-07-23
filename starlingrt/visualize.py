@@ -17,7 +17,7 @@ from bokeh.models.sources import CDSView, ColumnDataSource
 from bokeh.models.tools import CrosshairTool, HoverTool
 from bokeh.models.widgets.buttons import Button
 from bokeh.models.widgets.groups import RadioButtonGroup
-from bokeh.models import FileInput, RangeSlider, Select, Slider, TextInput
+from bokeh.models.widgets.inputs import FileInput, RangeSlider, Select, Slider, TextInput  # type: ignore[attr-defined]
 from bokeh.models.widgets.tables import (
     DataTable,
     HTMLTemplateFormatter,
