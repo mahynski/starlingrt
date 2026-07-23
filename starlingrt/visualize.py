@@ -3,6 +3,8 @@ Visualize GCMS data to determine consensus and any corrections necessary.
 
 Author: Nathan A. Mahynski
 """
+from typing import Any, cast
+
 import numpy as np
 from starlingrt import functions, data
 
@@ -15,7 +17,7 @@ from bokeh.models.sources import CDSView, ColumnDataSource
 from bokeh.models.tools import CrosshairTool, HoverTool
 from bokeh.models.widgets.buttons import Button
 from bokeh.models.widgets.groups import RadioButtonGroup
-from bokeh.models.widgets.inputs import FileInput, RangeSlider, Select, Slider, TextInput
+from bokeh.models.widgets.inputs import FileInput, RangeSlider, Select, Slider, TextInput  # type: ignore[attr-defined]
 from bokeh.models.widgets.tables import (
     DataTable,
     HTMLTemplateFormatter,
@@ -24,6 +26,8 @@ from bokeh.models.widgets.tables import (
     TableColumn,
 )
 from bokeh.plotting import figure, output_file, save
+
+bokeh_figure = cast(Any, figure)
 
 def make(
     top_entries: dict[str, data.Entry],
@@ -158,7 +162,7 @@ def make(
     )
 
     # Make Figure
-    p = figure(
+    p = bokeh_figure(
         background_fill_color="#efefef",
         x_range=ordered_cats,
         title="Retention Time Ranges",
@@ -286,12 +290,12 @@ def make(
     source_current.change.emit();
     """
 
-    compounds_hist, compounds_edges, points = functions.make_histograms(
+    compounds_hist, compounds_edges, hist_points = functions.make_histograms(
         by_name, k_values, bins=10
     )
 
     def compare_factory(dropdown=True):
-        compare = figure(
+        compare = bokeh_figure(
             y_axis_label="Counts",
             x_axis_label="Retention Time",
         )
@@ -309,15 +313,15 @@ def make(
 
         source_concerns = ColumnDataSource(
             dict(
-                x=points[name][str(np.min(k_values))]["concern"]["x"],
-                y=points[name][str(np.min(k_values))]["concern"]["y"],
+                x=hist_points[name][str(np.min(k_values))]["concern"]["x"],
+                y=hist_points[name][str(np.min(k_values))]["concern"]["y"],
             )
         )
 
         source_not_concern = ColumnDataSource(
             dict(
-                x=points[name][str(np.min(k_values))]["not_concern"]["x"],
-                y=points[name][str(np.min(k_values))]["not_concern"]["y"],
+                x=hist_points[name][str(np.min(k_values))]["not_concern"]["x"],
+                y=hist_points[name][str(np.min(k_values))]["not_concern"]["y"],
             )
         )
 
@@ -399,7 +403,7 @@ def make(
                 total_source=total_source,
                 compounds_hist=compounds_hist,
                 compounds_edges=compounds_edges,
-                points=points,
+                points=hist_points,
                 compound_select=compound_select,
                 k_select=k_select,
             ),
@@ -457,9 +461,9 @@ def make(
     # Link plots with crosshair
     i_width = Span(dimension="width", line_dash="dashed", line_width=2)
     i_height = Span(dimension="height", line_dash="dotted", line_width=2)
-    compare_1.add_tools(CrosshairTool(overlay=[i_width, i_height]))
-    compare_2.add_tools(CrosshairTool(overlay=[i_width, i_height]))
-    compare_3.add_tools(CrosshairTool(overlay=[i_width, i_height]))
+    compare_1.add_tools(CrosshairTool(overlay=(i_width, i_height)))
+    compare_2.add_tools(CrosshairTool(overlay=(i_width, i_height)))
+    compare_3.add_tools(CrosshairTool(overlay=(i_width, i_height)))
 
     (
         alt_compare_1,
@@ -492,9 +496,9 @@ def make(
     # Link plots with crosshair
     alt_i_width = Span(dimension="width", line_dash="dashed", line_width=2)
     alt_i_height = Span(dimension="height", line_dash="dotted", line_width=2)
-    alt_compare_1.add_tools(CrosshairTool(overlay=[alt_i_width, alt_i_height]))
-    alt_compare_2.add_tools(CrosshairTool(overlay=[alt_i_width, alt_i_height]))
-    alt_compare_3.add_tools(CrosshairTool(overlay=[alt_i_width, alt_i_height]))
+    alt_compare_1.add_tools(CrosshairTool(overlay=(alt_i_width, alt_i_height)))
+    alt_compare_2.add_tools(CrosshairTool(overlay=(alt_i_width, alt_i_height)))
+    alt_compare_3.add_tools(CrosshairTool(overlay=(alt_i_width, alt_i_height)))
 
     # Min observation slider (filter)
     min_obs_slider = Slider(
