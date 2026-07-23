@@ -30,7 +30,7 @@ dependencies = [
     "scikit-learn",
     "matplotlib>=3.7.2",
     "pandas==2.2",
-    "bokeh==3.0.3",
+    "bokeh==3.8.2",
     "xlrd==2.0.1",
     "pre-commit==3.3.3",
     "pytest>=7.4.0",
