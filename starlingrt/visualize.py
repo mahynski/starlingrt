@@ -6,10 +6,24 @@ Author: Nathan A. Mahynski
 import numpy as np
 from starlingrt import functions, data
 
-from bokeh.plotting import figure, output_file, save
 from bokeh.layouts import layout
-from bokeh.models import ColumnDataSource, DataTable, HoverTool, HoverTool, CrosshairTool, FileInput, SelectEditor, CustomJS, Segment, VBar, Rect, Button, TextInput, RadioButtonGroup, Span, StringFormatter, TableColumn, RangeSlider, Slider, Select, CDSView, IndexFilter, HTMLTemplateFormatter  # type: ignore [attr-defined]
-
+from bokeh.models.annotations import Span
+from bokeh.models.callbacks import CustomJS
+from bokeh.models.filters import IndexFilter
+from bokeh.models.glyphs import Rect, Segment, VBar
+from bokeh.models.sources import CDSView, ColumnDataSource
+from bokeh.models.tools import CrosshairTool, HoverTool
+from bokeh.models.widgets.buttons import Button
+from bokeh.models.widgets.groups import RadioButtonGroup
+from bokeh.models.widgets.inputs import FileInput, RangeSlider, Select, Slider, TextInput
+from bokeh.models.widgets.tables import (
+    DataTable,
+    HTMLTemplateFormatter,
+    SelectEditor,
+    StringFormatter,
+    TableColumn,
+)
+from bokeh.plotting import figure, output_file, save
 
 def make(
     top_entries: dict[str, data.Entry],
