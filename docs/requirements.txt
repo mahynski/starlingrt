@@ -87,7 +87,7 @@ markupsafe==3.0.2
     #   nbconvert
 matplotlib==3.9.2
     # via -r requirements.in
-mistune==3.0.2
+mistune==3.3.0
     # via nbconvert
 nbclient==0.10.0
     # via nbconvert
@@ -232,7 +232,9 @@ traitlets==5.14.3
     #   nbformat
     #   nbsphinx
 typing-extensions==4.12.2
-    # via pydata-sphinx-theme
+    # via
+    #   mistune
+    #   pydata-sphinx-theme
 tzdata==2024.2
     # via pandas
 urllib3==2.7.0
