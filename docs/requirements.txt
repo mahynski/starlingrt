@@ -87,7 +87,7 @@ markupsafe==3.0.2
     #   nbconvert
 matplotlib==3.9.2
     # via -r requirements.in
-mistune==3.3.0
+mistune==3.3.3
     # via nbconvert
 narwhals==2.24.0
     # via bokeh
