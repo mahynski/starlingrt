@@ -24,7 +24,7 @@ bleach[css]==6.4.0
     # via nbconvert
 bokeh==3.8.2
     # via -r requirements.in
-certifi==2024.8.30
+certifi==2026.10.19
     # via requests
 charset-normalizer==3.4.0
     # via requests
