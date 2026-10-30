@@ -93,7 +93,7 @@ narwhals==2.24.0
     # via bokeh
 nbclient==0.10.0
     # via nbconvert
-nbconvert==7.17.1
+nbconvert==7.17.2
     # via nbsphinx
 nbformat==5.10.4
     # via
